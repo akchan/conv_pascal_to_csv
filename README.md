@@ -2,6 +2,8 @@
 
 Annotation format converter from Pascal VOC format to [fizyr/keras-retinanet](https://github.com/fizyr/keras-retinanet) csv format
 
+This script improve object detection development flow with [fizyr/keras-retinanet](https://github.com/fizyr/keras-retinanet).
+
 ## Description
 
 Around object detection development, it is hard to preparing training data. Some software (ex, [LabelImg](https://github.com/tzutalin/labelImg)) help this situation but doesn't output with csv format of [fizyr/keras-retinanet](https://github.com/fizyr/keras-retinanet).
@@ -36,6 +38,10 @@ You can give these directory to train.py of [fizyr/keras-retinanet](https://gith
 cd PATH_TO_KERAS_RETINANET
 python ./keras_retinanet/bin/train.py csv PATH_TO_ANNOTATIONS PATH_TO_CLASSES --val-annotations PATH_TO_VAL_ANNOTATIONS
 ```
+
+## Sources
+
+- [Sample images](https://github.com/vc1492a/Hey-Waldo)
 
 ## Licence
 
