@@ -1,0 +1,26 @@
+<annotation>
+	<folder>JPEGImages</folder>
+	<filename>19.jpg</filename>
+	<path>/Users/satoshi/Dropbox/MyNote/IT/180926_自由研究/ウォーリーを探す/training_data_180929/JPEGImages/19.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1280</width>
+		<height>864</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>wally</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>335</xmin>
+			<ymin>619</ymin>
+			<xmax>354</xmax>
+			<ymax>643</ymax>
+		</bndbox>
+	</object>
+</annotation>
