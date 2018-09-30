@@ -92,11 +92,16 @@ objects = Dir.glob(opt[:path][:annotation] + '*.xml').map {|path_xml|
 
   objects
 }.flatten(1)
+.map{|object|
+  object[0] = opt[:path][:dest_images].relative_path_from(opt[:path][:csv]) + "#{object[0]}.jpg"
+  object
+}
 
 un_used_images = used_images.select{|basename, flag|
                               flag == false
                             }
                             .map{|basename, flag|
+                              relative_path = opt[:path][:dest_images].relative_path_from(opt[:path][:csv]) + "#{basename}.jpg"
                               [basename, "", "", "", "", ""]
                             }
 
@@ -107,14 +112,11 @@ end
 Dir.chdir(opt[:path][:csv]) do
   n_val = (images_path.size * opt[:val_ratio]).floor
   objects.shuffle!
-  relative_path = opt[:path][:dest_images].relative_path_from(opt[:path][:csv])
 
   file_val = 'val_annotations.csv'
   CSV.open(file_val, "w") do |csv|
     puts "Creating #{file_val}"
-
     objects.pop(n_val).each do |object|
-      object[0] = relative_path + "#{object[0]}.jpg"
       csv << object
     end
   end
@@ -123,12 +125,10 @@ Dir.chdir(opt[:path][:csv]) do
   CSV.open(file_an, 'w') do |csv|
     puts "Creating #{file_an}"
     objects.each do |object|
-      object[0] = relative_path + "#{object[0]}.jpg"
       csv << object
     end
 
     un_used_images.each do |object|
-      object[0] = relative_path + "#{object[0]}.jpg"
       csv << object
     end
   end
