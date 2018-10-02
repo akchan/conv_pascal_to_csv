@@ -63,8 +63,8 @@ end
 
 # Copying images
 # 
-if not Dir.exist?(opt[:path][:src_images])
-  Dir.mkdir(opt[:path][:src_images])
+if not Dir.exist?(opt[:path][:dest_images])
+  Dir.mkdir(opt[:path][:dest_images])
 end
 
 images_path = Dir.glob(opt[:path][:src_images] + '*.jpg')
