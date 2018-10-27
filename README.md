@@ -2,7 +2,7 @@
 
 Annotation format converter from Pascal VOC format to [fizyr/keras-retinanet](https://github.com/fizyr/keras-retinanet) csv format
 
-This script improve object detection development flow with [fizyr/keras-retinanet](https://github.com/fizyr/keras-retinanet).
+This script improve object detection development workflow with [fizyr/keras-retinanet](https://github.com/fizyr/keras-retinanet).
 
 ## Description
 
