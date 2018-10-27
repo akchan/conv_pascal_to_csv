@@ -68,9 +68,11 @@ if not Dir.exist?(opt[:path][:dest_images])
 end
 
 images_path = Dir.glob(opt[:path][:src_images] + '*.jpg')
-images_path.each do |src_img_path|
-  puts "Copying image file: #{src_img_path}"
-  FileUtils.cp(src_img_path, opt[:path][:dest_images])
+if opt[:path][:src_images] =! opt[:path][:dest_images]  
+  images_path.each do |src_img_path|
+    puts "Copying image file: #{src_img_path}"
+    FileUtils.cp(src_img_path, opt[:path][:dest_images])
+  end
 end
 
 
@@ -102,7 +104,7 @@ un_used_images = used_images.select{|basename, flag|
                             }
                             .map{|basename, flag|
                               relative_path = opt[:path][:dest_images].relative_path_from(opt[:path][:csv]) + "#{basename}.jpg"
-                              [basename, "", "", "", "", ""]
+                              [relative_path, "", "", "", "", ""]
                             }
 
 if not Dir.exist?(opt[:path][:csv])
