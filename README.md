@@ -6,9 +6,9 @@ This script improve object detection development workflow with [fizyr/keras-reti
 
 ## Description
 
-Around object detection development, it is hard to preparing training data. Some software (ex, [LabelImg](https://github.com/tzutalin/labelImg)) help this situation but doesn't output with csv format of [fizyr/keras-retinanet](https://github.com/fizyr/keras-retinanet).
+Around object detection development, it is a hard work to preparing training data. Some software (ex, [LabelImg](https://github.com/tzutalin/labelImg)) help this situation but doesn't output with csv format of [fizyr/keras-retinanet](https://github.com/fizyr/keras-retinanet).
 
-Using this script, you can convert original annotations from Pascal VOC xml format with which LabelImg outputs, to csv format which [fizyr/keras-retinanet](https://github.com/fizyr/keras-retinanet) requires.
+Using this script `conv_pascal_to_csv.rb`, you can convert annotations from Pascal VOC xml format with which LabelImg outputs, to csv format which [fizyr/keras-retinanet](https://github.com/fizyr/keras-retinanet) requires.
 
 ## Requirement
 
