@@ -84,20 +84,24 @@ classes = []
 
 objects = Dir.glob(opt[:path][:annotation] + '*.xml').map {|path_xml|
   basename = File.basename(path_xml, '.xml')
+  path_jpg = opt[:path][:dest_images].relative_path_from(opt[:path][:csv]) + "#{basename}.jpg"
 
   objects = open_and_parse_xml(path_xml).map {|x1, y1, x2, y2, class_name|
     classes << class_name
-    [basename, x1, y1, x2, y2, class_name]
+    [path_jpg, x1, y1, x2, y2, class_name]
   }
 
   used_images[basename] = true
 
   objects
-}.flatten(1)
-.map{|object|
-  object[0] = opt[:path][:dest_images].relative_path_from(opt[:path][:csv]) + "#{object[0]}.jpg"
-  object
-}
+}.shuffle
+
+n_val = (images_path.size * opt[:val_ratio]).floor
+objects_val = objects.pop(n_val)
+
+classes = classes.uniq
+objects = objects.flatten(1).sort_by{|path_jpg, x1, y1, x2, y2, class_name| [path_jpg, x1] }
+objects_val = objects_val.flatten(1).sort_by{|path_jpg, x1, y1, x2, y2, class_name| [path_jpg, x1] }
 
 un_used_images = used_images.select{|basename, flag|
                               flag == false
@@ -112,17 +116,6 @@ if not Dir.exist?(opt[:path][:csv])
 end
 
 Dir.chdir(opt[:path][:csv]) do
-  n_val = (images_path.size * opt[:val_ratio]).floor
-  objects.shuffle!
-
-  file_val = 'val_annotations.csv'
-  CSV.open(file_val, "w") do |csv|
-    puts "Creating #{file_val}"
-    objects.pop(n_val).each do |object|
-      csv << object
-    end
-  end
-
   file_an = 'annotations.csv'
   CSV.open(file_an, 'w') do |csv|
     puts "Creating #{file_an}"
@@ -135,11 +128,18 @@ Dir.chdir(opt[:path][:csv]) do
     end
   end
 
+  file_val = 'val_annotations.csv'
+  CSV.open(file_val, "w") do |csv|
+    puts "Creating #{file_val}"
+    objects_val.each do |object|
+      csv << object
+    end
+  end
 
   file_class = 'classes.csv'
   CSV.open(file_class, 'w') do |csv|
     puts "Creating #{file_class}"
-    classes.uniq.each.with_index do |c, i|
+    classes.each.with_index do |c, i|
       csv << [c, i]
     end
   end
