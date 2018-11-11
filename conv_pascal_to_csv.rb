@@ -38,7 +38,7 @@ opt = {
 opt_parse = OptionParser.new
 opt_parse.on('--annotation-path PATH', 'path to xml annotations directory') {|v| opt[:path][:annotation] = Pathname.new(File.absolute_path(v)) }
 opt_parse.on('--image-path PATH', 'path to jpeg images directory') {|v| opt[:path][:src_images] = Pathname.new(File.absolute_path(v)) }
-opt_parse.on('--val-ratio float', 'sample ratio for validation (0.0 - 1.0). default=0.1') {|v| opt[:val_ratio] = v}
+opt_parse.on('--val-ratio float', 'sample ratio for validation (0.0 - 1.0). default=0.1') {|v| opt[:val_ratio] = v.to_f}
 opt_parse.parse!(ARGV)
 
 
